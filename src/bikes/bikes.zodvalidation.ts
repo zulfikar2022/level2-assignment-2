@@ -13,10 +13,9 @@ const bikeValidationSchema = z.object({
 const orderValidationSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   product: z.string({ message: "Invalid product ID" }),
-  quantity: z
-    .number()
-    .int()
-    .positive({ message: "Quantity must be a positive integer" }),
+  quantity: z.number().int({ message: "Quantity must be a number" }).min(1, {
+    message: "Quantity must be a positive integer and greater than 0",
+  }),
 });
 
 export { bikeValidationSchema, orderValidationSchema };
