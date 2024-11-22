@@ -22,20 +22,3 @@ ProductSchema.pre("findOneAndUpdate", function (next) {
 
   next();
 });
-
-// OrderSchema.pre("save", async function (next) {
-//   console.log("pre save middleware called on OrderSchema");
-//   const order = this as IOrder;
-
-//   try {
-//     const product = await Product.findById(order.product);
-//     if (product) {
-//       order.totalPrice = product.price * order.quantity;
-//     }
-//     next();
-//   } catch (error) {
-//     next(
-//       new CustomError(`Product with id ${this.product} not found`, { error })
-//     );
-//   }
-// });

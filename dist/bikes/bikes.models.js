@@ -46,7 +46,7 @@ export const OrderSchema = new Schema({
                 const product = await Product.findOne({ _id: value });
                 return !!product;
             },
-            message: "Product does not exist in the Products collection",
+            message: "Bike does not exist in the Products collection",
         },
     },
     quantity: {

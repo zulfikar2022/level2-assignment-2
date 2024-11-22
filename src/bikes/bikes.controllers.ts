@@ -26,18 +26,18 @@ export async function validateProduct(
 export async function getAllProducts(req: Request, res: Response) {
   try {
     const products = await Product.find();
-    res.json(new CustomResponse("Products", products));
+    res.json(new CustomResponse("Bikes", products));
   } catch (error: any) {
-    res.json(new CustomError("Products not found", { error }, error.stack));
+    res.json(new CustomError("Bikes not found", { error }, error.stack));
   }
 }
 
 export async function getSpecificProduct(req: Request, res: Response) {
   try {
     const product = await Product.findById(req.params.productId);
-    res.json(new CustomResponse("Product", product));
+    res.json(new CustomResponse("Bike", product));
   } catch (error: any) {
-    res.json(new CustomError("Product not found", { error }, error.stack));
+    res.json(new CustomError("Bike not found", { error }, error.stack));
   }
 }
 
@@ -48,9 +48,18 @@ export async function updateSpecificProduct(req: Request, res: Response) {
       req.body,
       { new: true }
     );
-    res.json(new CustomResponse("Product updated", product));
+    res.json(new CustomResponse("Bike updated", product));
   } catch (error: any) {
-    res.json(new CustomError("Product not updated", { error }, error.stack));
+    res.json(new CustomError("Bike not updated", { error }, error.stack));
+  }
+}
+
+export async function deleteSpecificProduct(req: Request, res: Response) {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.productId);
+    res.json(new CustomResponse("Bike deleted", product));
+  } catch (error: any) {
+    res.json(new CustomError("Bike not deleted", { error }, error.stack));
   }
 }
 
@@ -58,9 +67,9 @@ export async function createProduct(req: Request, res: Response) {
   try {
     const product = new Product(req.body);
     await product.save();
-    res.json(new CustomResponse("Product created", { ...product.toObject() }));
+    res.json(new CustomResponse("Bike created", { ...product.toObject() }));
   } catch (error: any) {
     console.log(error);
-    res.json(new CustomError("Product not created", { error }, error.stack));
+    res.json(new CustomError("Bike not created", { error }, error.stack));
   }
 }
