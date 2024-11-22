@@ -34,6 +34,15 @@ export async function getSpecificProduct(req, res) {
         res.json(new CustomError("Product not found", { error }, error.stack));
     }
 }
+export async function updateSpecificProduct(req, res) {
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.productId, req.body, { new: true });
+        res.json(new CustomResponse("Product updated", product));
+    }
+    catch (error) {
+        res.json(new CustomError("Product not updated", { error }, error.stack));
+    }
+}
 export async function createProduct(req, res) {
     try {
         const product = new Product(req.body);

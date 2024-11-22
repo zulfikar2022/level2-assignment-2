@@ -40,6 +40,19 @@ export async function getSpecificProduct(req: Request, res: Response) {
   }
 }
 
+export async function updateSpecificProduct(req: Request, res: Response) {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      req.params.productId,
+      req.body,
+      { new: true }
+    );
+    res.json(new CustomResponse("Product updated", product));
+  } catch (error: any) {
+    res.json(new CustomError("Product not updated", { error }, error.stack));
+  }
+}
+
 export async function createProduct(req: Request, res: Response) {
   try {
     const product = new Product(req.body);
