@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 import { BikeCategory } from "./bikes.interfaces.js";
 // Schemas are here
-const ProductSchema = new Schema({
+export const ProductSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -31,10 +31,9 @@ const ProductSchema = new Schema({
     },
     inStock: {
         type: Boolean,
-        required: true,
     },
-});
-const OrderSchema = new Schema({
+}, { timestamps: true });
+export const OrderSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -58,7 +57,7 @@ const OrderSchema = new Schema({
         required: true,
         min: [0, "Total price cannot be negative"],
     },
-});
+}, { timestamps: true });
 // Models are here
 export const Product = model("Product", ProductSchema);
 export const Order = model("Order", OrderSchema);
