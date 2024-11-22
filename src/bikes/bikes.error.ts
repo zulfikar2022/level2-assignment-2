@@ -4,11 +4,11 @@ export class CustomError extends Error {
   error: object;
   stack: string | undefined;
 
-  constructor(message: string, errorDetails: object) {
+  constructor(message: string, errorDetails: object, stack: string) {
     super(message);
     this.message = message;
     this.success = false; // Always set false for failure response
     this.error = errorDetails;
-    this.stack = this.stack || "";
+    this.stack = stack;
   }
 }

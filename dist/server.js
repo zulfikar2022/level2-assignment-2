@@ -10,4 +10,6 @@ mongoose
         console.log(`The app is running on port ${dotenvConfigurations.port || 3000}`);
     });
 })
-    .catch((error) => new CustomError("Database Connection error", error));
+    .catch((error) => {
+    throw new CustomError("Database Connection error", error, error.stack);
+});

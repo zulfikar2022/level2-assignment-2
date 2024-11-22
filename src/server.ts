@@ -13,4 +13,6 @@ mongoose
       );
     });
   })
-  .catch((error) => new CustomError("Database Connection error", error));
+  .catch((error) => {
+    throw new CustomError("Database Connection error", error, error.stack);
+  });

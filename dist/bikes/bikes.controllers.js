@@ -10,7 +10,10 @@ export async function validateProduct(req, res, next) {
     catch (error) {
         // console.log(error.issues);
         const errorsToBeSent = error.issues;
-        res.status(400).json(new CustomError("Validation Error", errorsToBeSent));
+        console.log(error.stack);
+        res
+            .status(400)
+            .json(new CustomError("Validation Error", errorsToBeSent, error.stack));
     }
 }
 export async function getProducts(req, res) {
@@ -19,7 +22,7 @@ export async function getProducts(req, res) {
         res.json(new CustomResponse("Products", { products }));
     }
     catch (error) {
-        res.json(new CustomError("Products not found", { error }));
+        res.json(new CustomError("Products not found", { error }, error.stack));
     }
 }
 export async function createProduct(req, res) {
@@ -30,6 +33,6 @@ export async function createProduct(req, res) {
     }
     catch (error) {
         console.log(error);
-        res.json(new CustomError("Product not created", { error }));
+        res.json(new CustomError("Product not created", { error }, error.stack));
     }
 }

@@ -12,5 +12,5 @@ bikeRouter.get("/products", getProducts);
 bikeRouter.post("/products", validateProduct, createProduct);
 
 bikeRouter.all("*", (req: Request, res: Response) => {
-  res.json(new CustomError("Path not defined", {}));
+  res.json(new CustomError("Path not defined", {}, "fake error stack"));
 });

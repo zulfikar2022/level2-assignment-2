@@ -5,5 +5,5 @@ export const bikeRouter = express.Router();
 bikeRouter.get("/products", getProducts);
 bikeRouter.post("/products", validateProduct, createProduct);
 bikeRouter.all("*", (req, res) => {
-    res.json(new CustomError("Path not defined", {}));
+    res.json(new CustomError("Path not defined", {}, "fake error stack"));
 });
