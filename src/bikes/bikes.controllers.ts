@@ -3,6 +3,7 @@ import CustomResponse from "./bikes.success.js";
 import { Product } from "./bikes.models.js";
 import { CustomError } from "./bikes.error.js";
 import { bikeValidationSchema } from "./bikes.zodvalidation.js";
+import { IProduct } from "./bikes.interfaces.js";
 
 export async function validateProduct(
   req: Request,
