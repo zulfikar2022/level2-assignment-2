@@ -2,9 +2,13 @@
   "name": "assignment_2",
   "version": "1.0.0",
   "type": "module",
+  "exports": {
+    "./module": "./dist/module.js"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && tsc-alias",
     "start:dev": "nodemon ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +26,7 @@
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.6.3"
   }
 }

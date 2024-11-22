@@ -1,4 +1,4 @@
-export class CustomResponse<T> {
+class CustomResponse<T> {
   message: string;
   success: boolean;
   data: T;
@@ -9,3 +9,5 @@ export class CustomResponse<T> {
     this.data = data;
   }
 }
+
+export default CustomResponse;
