@@ -5,6 +5,7 @@ import {
   deleteSpecificProduct,
   getAllProducts,
   getSpecificProduct,
+  getTotalRevenue,
   updateSpecificProduct,
   validateOrder,
   validateProduct,
@@ -19,6 +20,7 @@ bikeRouter.post("/products", validateProduct, createProduct); // create product
 bikeRouter.put("/products/:productId", validateProduct, updateSpecificProduct); // update product
 bikeRouter.delete("/products/:productId", deleteSpecificProduct); // delete product
 bikeRouter.post("/orders", validateOrder, createOrder); // create order
+bikeRouter.get("/orders/revenue", getTotalRevenue); // get total revenue
 
 // for undefined routes
 bikeRouter.all("*", (req: Request, res: Response) => {

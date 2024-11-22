@@ -106,3 +106,22 @@ export async function createOrder(req, res) {
         res.json(new CustomError("Product not found", { error }, error.stack));
     }
 }
+export async function getTotalRevenue(req, res) {
+    try {
+        const revenue = await Order.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalRevenue: { $sum: "$totalPrice" },
+                },
+            },
+        ]);
+        console.log(revenue);
+        res.json(new CustomResponse("Revenue calculated successfully", {
+            totalRevenue: revenue[0]?.totalRevenue || 0,
+        }));
+    }
+    catch (error) {
+        res.json(new CustomError("Failed to calculate revenue", { error }, error.stack));
+    }
+}

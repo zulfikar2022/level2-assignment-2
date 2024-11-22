@@ -124,3 +124,27 @@ export async function createOrder(req: Request, res: Response) {
     res.json(new CustomError("Product not found", { error }, error.stack));
   }
 }
+
+export async function getTotalRevenue(req: Request, res: Response) {
+  try {
+    const revenue = await Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: "$totalPrice" },
+        },
+      },
+    ]);
+    console.log(revenue);
+
+    res.json(
+      new CustomResponse("Revenue calculated successfully", {
+        totalRevenue: revenue[0]?.totalRevenue || 0,
+      })
+    );
+  } catch (error: any) {
+    res.json(
+      new CustomError("Failed to calculate revenue", { error }, error.stack)
+    );
+  }
+}
