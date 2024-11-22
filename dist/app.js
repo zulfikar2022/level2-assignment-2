@@ -7,7 +7,7 @@ export const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/api", bikeRouter);
+// for undefined routes
 app.all("*", (req, res) => {
     res.json(new CustomError("Path not defined", {}, "fake error stack here"));
 });
-//router

@@ -6,7 +6,6 @@ import {
   bikeValidationSchema,
   orderValidationSchema,
 } from "./bikes.zodvalidation.js";
-import { IProduct } from "./bikes.interfaces.js";
 
 export async function validateProduct(
   req: Request,
@@ -17,9 +16,7 @@ export async function validateProduct(
     bikeValidationSchema.parse(req.body);
     next();
   } catch (error: any) {
-    // console.log(error.issues);
     const errorsToBeSent = error.issues;
-    console.log(error.stack);
     res
       .status(400)
       .json(new CustomError("Validation Error", errorsToBeSent, error.stack));
@@ -67,10 +64,14 @@ export async function getSpecificProduct(req: Request, res: Response) {
 }
 
 export async function updateSpecificProduct(req: Request, res: Response) {
+  const newProduct = req.body;
   try {
+    bikeValidationSchema.parse(newProduct);
+
+    newProduct.inStock = newProduct.quantity > 0;
     const product = await Product.findByIdAndUpdate(
       req.params.productId,
-      req.body,
+      newProduct,
       { new: true }
     );
     res.json(new CustomResponse("Bike updated", product));
@@ -89,12 +90,15 @@ export async function deleteSpecificProduct(req: Request, res: Response) {
 }
 
 export async function createProduct(req: Request, res: Response) {
+  const newProduct = req.body;
   try {
-    const product = new Product(req.body);
+    bikeValidationSchema.parse(newProduct);
+
+    newProduct.inStock = newProduct.quantity > 0;
+    const product = new Product(newProduct);
     await product.save();
-    res.json(new CustomResponse("Bike created", { ...product.toObject() }));
+    res.json(new CustomResponse("Bike created", product));
   } catch (error: any) {
-    console.log(error);
     res.json(new CustomError("Bike not created", { error }, error.stack));
   }
 }
@@ -135,7 +139,6 @@ export async function getTotalRevenue(req: Request, res: Response) {
         },
       },
     ]);
-    console.log(revenue);
 
     res.json(
       new CustomResponse("Revenue calculated successfully", {

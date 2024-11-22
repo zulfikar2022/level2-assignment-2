@@ -8,9 +8,7 @@ export async function validateProduct(req, res, next) {
         next();
     }
     catch (error) {
-        // console.log(error.issues);
         const errorsToBeSent = error.issues;
-        console.log(error.stack);
         res
             .status(400)
             .json(new CustomError("Validation Error", errorsToBeSent, error.stack));
@@ -53,8 +51,11 @@ export async function getSpecificProduct(req, res) {
     }
 }
 export async function updateSpecificProduct(req, res) {
+    const newProduct = req.body;
     try {
-        const product = await Product.findByIdAndUpdate(req.params.productId, req.body, { new: true });
+        bikeValidationSchema.parse(newProduct);
+        newProduct.inStock = newProduct.quantity > 0;
+        const product = await Product.findByIdAndUpdate(req.params.productId, newProduct, { new: true });
         res.json(new CustomResponse("Bike updated", product));
     }
     catch (error) {
@@ -71,13 +72,15 @@ export async function deleteSpecificProduct(req, res) {
     }
 }
 export async function createProduct(req, res) {
+    const newProduct = req.body;
     try {
-        const product = new Product(req.body);
+        bikeValidationSchema.parse(newProduct);
+        newProduct.inStock = newProduct.quantity > 0;
+        const product = new Product(newProduct);
         await product.save();
-        res.json(new CustomResponse("Bike created", { ...product.toObject() }));
+        res.json(new CustomResponse("Bike created", product));
     }
     catch (error) {
-        console.log(error);
         res.json(new CustomError("Bike not created", { error }, error.stack));
     }
 }
@@ -116,7 +119,6 @@ export async function getTotalRevenue(req, res) {
                 },
             },
         ]);
-        console.log(revenue);
         res.json(new CustomResponse("Revenue calculated successfully", {
             totalRevenue: revenue[0]?.totalRevenue || 0,
         }));

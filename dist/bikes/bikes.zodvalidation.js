@@ -5,10 +5,7 @@ const bikeValidationSchema = z.object({
     brand: z.string().min(1, { message: "Brand is required" }),
     price: z.number().positive({ message: "Price must be a positive number" }),
     category: z.nativeEnum(BikeCategory, { message: "Invalid bike category" }),
-    quantity: z
-        .number()
-        .int()
-        .positive({ message: "Quantity must be a positive integer" }),
+    quantity: z.number().int().min(0, { message: "Quantity cannot be negative" }),
     description: z.string().optional(),
 });
 const orderValidationSchema = z.object({
