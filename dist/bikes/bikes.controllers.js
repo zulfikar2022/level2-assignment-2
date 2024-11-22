@@ -17,9 +17,17 @@ export async function validateProduct(req, res, next) {
     }
 }
 export async function getAllProducts(req, res) {
+    const queryParameters = req.query;
+    const key = Object.keys(queryParameters)[0];
     try {
-        const products = await Product.find();
-        res.json(new CustomResponse("Bikes", products));
+        if (!key) {
+            const products = await Product.find();
+            res.json(new CustomResponse("Bikes", products));
+        }
+        else {
+            const products = await Product.find(queryParameters);
+            res.json(new CustomResponse("Bikes", products));
+        }
     }
     catch (error) {
         res.json(new CustomError("Bikes not found", { error }, error.stack));
