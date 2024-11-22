@@ -16,13 +16,22 @@ export async function validateProduct(req, res, next) {
             .json(new CustomError("Validation Error", errorsToBeSent, error.stack));
     }
 }
-export async function getProducts(req, res) {
+export async function getAllProducts(req, res) {
     try {
         const products = await Product.find();
-        res.json(new CustomResponse("Products", { products }));
+        res.json(new CustomResponse("Products", products));
     }
     catch (error) {
         res.json(new CustomError("Products not found", { error }, error.stack));
+    }
+}
+export async function getSpecificProduct(req, res) {
+    try {
+        const product = await Product.findById(req.params.productId);
+        res.json(new CustomResponse("Product", product));
+    }
+    catch (error) {
+        res.json(new CustomError("Product not found", { error }, error.stack));
     }
 }
 export async function createProduct(req, res) {

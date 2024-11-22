@@ -1,14 +1,16 @@
 import express, { Request, Response } from "express";
 import {
   createProduct,
-  getProducts,
+  getAllProducts,
+  getSpecificProduct,
   validateProduct,
 } from "./bikes.controllers.js";
 import { CustomError } from "./bikes.error.js";
 
 export const bikeRouter = express.Router();
 
-bikeRouter.get("/products", getProducts);
+bikeRouter.get("/products", getAllProducts);
+bikeRouter.get("/products/:productId", getSpecificProduct);
 bikeRouter.post("/products", validateProduct, createProduct);
 
 bikeRouter.all("*", (req: Request, res: Response) => {

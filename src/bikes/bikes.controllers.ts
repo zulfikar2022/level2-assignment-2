@@ -22,12 +22,21 @@ export async function validateProduct(
   }
 }
 
-export async function getProducts(req: Request, res: Response) {
+export async function getAllProducts(req: Request, res: Response) {
   try {
     const products = await Product.find();
-    res.json(new CustomResponse("Products", { products }));
+    res.json(new CustomResponse("Products", products));
   } catch (error: any) {
     res.json(new CustomError("Products not found", { error }, error.stack));
+  }
+}
+
+export async function getSpecificProduct(req: Request, res: Response) {
+  try {
+    const product = await Product.findById(req.params.productId);
+    res.json(new CustomResponse("Product", product));
+  } catch (error: any) {
+    res.json(new CustomError("Product not found", { error }, error.stack));
   }
 }
 
