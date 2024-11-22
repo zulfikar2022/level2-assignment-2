@@ -1,6 +1,7 @@
 import express from "express";
-import { createOrder, createProduct, deleteSpecificProduct, getAllProducts, getSpecificProduct, getTotalRevenue, updateSpecificProduct, validateOrder, validateProduct, } from "./bikes.controllers.js";
+import { createOrder, createProduct, deleteSpecificProduct, getAllProducts, getSpecificProduct, getTotalRevenue, updateSpecificProduct, } from "./bikes.controllers.js";
 import { CustomError } from "./bikes.error.js";
+import { validateOrder, validateProduct } from "./bikes.routemiddleware.js";
 export const bikeRouter = express.Router();
 bikeRouter.get("/products", getAllProducts); // get all products
 bikeRouter.get("/products/:productId", getSpecificProduct); // get specific product

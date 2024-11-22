@@ -7,10 +7,9 @@ import {
   getSpecificProduct,
   getTotalRevenue,
   updateSpecificProduct,
-  validateOrder,
-  validateProduct,
 } from "./bikes.controllers.js";
 import { CustomError } from "./bikes.error.js";
+import { validateOrder, validateProduct } from "./bikes.routemiddleware.js";
 
 export const bikeRouter = express.Router();
 

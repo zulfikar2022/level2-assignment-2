@@ -7,36 +7,6 @@ import {
   orderValidationSchema,
 } from "./bikes.zodvalidation.js";
 
-export async function validateProduct(
-  req: Request,
-  res: Response,
-  next: Function
-) {
-  try {
-    bikeValidationSchema.parse(req.body);
-    next();
-  } catch (error: any) {
-    const errorsToBeSent = error.issues;
-    res
-      .status(400)
-      .json(new CustomError("Validation Error", errorsToBeSent, error.stack));
-  }
-}
-
-export async function validateOrder(
-  req: Request,
-  res: Response,
-  next: Function
-) {
-  // validate order
-  try {
-    orderValidationSchema.parse(req.body);
-    next();
-  } catch (error: any) {
-    res.json(new CustomError("Order Validation Error", { error }, error.stack));
-  }
-}
-
 export async function getAllProducts(req: Request, res: Response) {
   const queryParameters = req.query;
   const key = Object.keys(queryParameters)[0];

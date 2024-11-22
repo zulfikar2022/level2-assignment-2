@@ -1,29 +1,7 @@
 import CustomResponse from "./bikes.success.js";
 import { Order, Product } from "./bikes.models.js";
 import { CustomError } from "./bikes.error.js";
-import { bikeValidationSchema, orderValidationSchema, } from "./bikes.zodvalidation.js";
-export async function validateProduct(req, res, next) {
-    try {
-        bikeValidationSchema.parse(req.body);
-        next();
-    }
-    catch (error) {
-        const errorsToBeSent = error.issues;
-        res
-            .status(400)
-            .json(new CustomError("Validation Error", errorsToBeSent, error.stack));
-    }
-}
-export async function validateOrder(req, res, next) {
-    // validate order
-    try {
-        orderValidationSchema.parse(req.body);
-        next();
-    }
-    catch (error) {
-        res.json(new CustomError("Order Validation Error", { error }, error.stack));
-    }
-}
+import { bikeValidationSchema, } from "./bikes.zodvalidation.js";
 export async function getAllProducts(req, res) {
     const queryParameters = req.query;
     const key = Object.keys(queryParameters)[0];
