@@ -41,11 +41,13 @@ export const OrderSchema = new Schema({
     product: {
         type: String,
         required: true,
-        validate: async function (value) {
-            const product = await Product.findOne({ _id: value });
-            return !!product;
+        validate: {
+            validator: async function (value) {
+                const product = await Product.findOne({ _id: value });
+                return !!product;
+            },
+            message: "Product does not exist in the Products collection",
         },
-        message: "Product does not exist in the Products collection",
     },
     quantity: {
         type: Number,
