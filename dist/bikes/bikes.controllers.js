@@ -8,11 +8,11 @@ export async function getAllProducts(req, res) {
     try {
         if (!key) {
             const products = await Product.find();
-            res.json(new CustomResponse("Bikes", products));
+            res.json(new CustomResponse("Bikes Retrieved successfully", products));
         }
         else {
             const products = await Product.find(queryParameters);
-            res.json(new CustomResponse("Bikes", products));
+            res.json(new CustomResponse("Bikes Retrieved successfully", products));
         }
     }
     catch (error) {
@@ -22,7 +22,7 @@ export async function getAllProducts(req, res) {
 export async function getSpecificProduct(req, res) {
     try {
         const product = await Product.findById(req.params.productId);
-        res.json(new CustomResponse("Bike", product));
+        res.json(new CustomResponse("Bike retrieved successfully", product));
     }
     catch (error) {
         res.json(new CustomError("Bike not found", { error }, error.stack));
@@ -34,7 +34,7 @@ export async function updateSpecificProduct(req, res) {
         bikeValidationSchema.parse(newProduct);
         newProduct.inStock = newProduct.quantity > 0;
         const product = await Product.findByIdAndUpdate(req.params.productId, newProduct, { new: true });
-        res.json(new CustomResponse("Bike updated", product));
+        res.json(new CustomResponse("Bike updated successfully", product));
     }
     catch (error) {
         res.json(new CustomError("Bike not updated", { error }, error.stack));
@@ -43,7 +43,7 @@ export async function updateSpecificProduct(req, res) {
 export async function deleteSpecificProduct(req, res) {
     try {
         const product = await Product.findByIdAndDelete(req.params.productId);
-        res.json(new CustomResponse("Bike deleted", product));
+        res.json(new CustomResponse("Bike deleted successfully", product));
     }
     catch (error) {
         res.json(new CustomError("Bike not deleted", { error }, error.stack));
@@ -56,7 +56,7 @@ export async function createProduct(req, res) {
         newProduct.inStock = newProduct.quantity > 0;
         const product = new Product(newProduct);
         await product.save();
-        res.json(new CustomResponse("Bike created", product));
+        res.json(new CustomResponse("Bike created successfully", product));
     }
     catch (error) {
         res.json(new CustomError("Bike not created", { error }, error.stack));
@@ -76,7 +76,7 @@ export async function createOrder(req, res) {
                 const order = { ...orderBody, totalPrice };
                 const newOrder = new Order(order);
                 await newOrder.save();
-                res.json(new CustomResponse("Order created", newOrder));
+                res.json(new CustomResponse("Order created successfully", newOrder));
             }
             catch (error) {
                 res.json(new CustomError("Order is not created", { error }, error.stack));
