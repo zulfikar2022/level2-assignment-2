@@ -108,3 +108,12 @@ export async function getTotalRevenue(req, res) {
         res.json(new CustomError("Failed to calculate revenue", { error }, error.stack));
     }
 }
+export async function getAllOrders(req, res) {
+    try {
+        const orders = await Order.find();
+        res.json(new CustomResponse("Orders Retrieved successfully", orders));
+    }
+    catch (error) {
+        res.json(new CustomError("Orders not found", { error }, error.stack));
+    }
+}

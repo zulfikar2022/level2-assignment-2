@@ -1,5 +1,5 @@
 import express from "express";
-import { createOrder, createProduct, deleteSpecificProduct, getAllProducts, getSpecificProduct, getTotalRevenue, updateSpecificProduct, } from "./bikes.controllers.js";
+import { createOrder, createProduct, deleteSpecificProduct, getAllOrders, getAllProducts, getSpecificProduct, getTotalRevenue, updateSpecificProduct, } from "./bikes.controllers.js";
 import { CustomError } from "./bikes.error.js";
 import { validateOrder, validateProduct } from "./bikes.routemiddleware.js";
 export const bikeRouter = express.Router();
@@ -10,6 +10,7 @@ bikeRouter.put("/products/:productId", validateProduct, updateSpecificProduct); 
 bikeRouter.delete("/products/:productId", deleteSpecificProduct); // delete product
 bikeRouter.post("/orders", validateOrder, createOrder); // create order
 bikeRouter.get("/orders/revenue", getTotalRevenue); // get total revenue
+bikeRouter.get("/orders", getAllOrders); // get all orders
 // for undefined routes
 bikeRouter.all("*", (req, res) => {
     res.json(new CustomError("Path not defined", {}, "fake error stack"));
