@@ -21,6 +21,7 @@ bikeRouter.put("/products/:productId", validateProduct, updateSpecificProduct); 
 bikeRouter.delete("/products/:productId", deleteSpecificProduct); // delete product
 bikeRouter.post("/orders", validateOrder, createOrder); // create order
 bikeRouter.get("/orders/revenue", getTotalRevenue); // get total revenue
+// An additional route for getting all orders which is not defined in the assignment description
 bikeRouter.get("/orders", getAllOrders); // get all orders
 
 // for undefined routes
