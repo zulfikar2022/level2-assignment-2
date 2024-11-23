@@ -14,5 +14,6 @@ mongoose
     });
   })
   .catch((error) => {
-    throw new CustomError("Database Connection error", error, error.stack);
+    console.log("Database connection failed");
+    console.log("error message: ", error.message);
   });

@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { app } from "./app.js";
 import { dotenvConfigurations } from "./configurations/dotenv.config.js";
-import { CustomError } from "./bikes/bikes.error.js";
 mongoose
     .connect(dotenvConfigurations.mongodb_connection_string)
     .then(() => {
@@ -11,5 +10,6 @@ mongoose
     });
 })
     .catch((error) => {
-    throw new CustomError("Database Connection error", error, error.stack);
+    console.log("Database connection failed");
+    console.log("error message: ", error.message);
 });
