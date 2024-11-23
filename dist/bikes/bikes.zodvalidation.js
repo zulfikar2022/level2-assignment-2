@@ -5,12 +5,12 @@ const bikeValidationSchema = z
     name: z.string().min(1, { message: "Name is required" }).trim(),
     brand: z.string().min(1, { message: "Brand is required" }).trim(),
     price: z.number().positive({ message: "Price must be a positive number" }),
-    category: z
-        .string()
-        .transform((val) => val.trim()) // Trim spaces
+    category: z.preprocess((val) => (typeof val === "string" ? val.trim() : val), // Trim if it's a string
+    z
+        .nativeEnum(BikeCategory)
         .refine((val) => Object.values(BikeCategory).includes(val), {
         message: "Invalid bike category",
-    }),
+    })),
     quantity: z
         .number()
         .int()
