@@ -20,3 +20,8 @@ This project is a backend project created using javascript's library typescript 
    > > From all the orders revenue is calculated and to calculate this I've used aggregation of mongodb. [Calculate revenue](https://assignment2-chi-nine.vercel.app/api/orders/revenue)
 8. Getting all the orders.
    > > An additional route is created here which is not required in the assignment. That is to get all the orders. [Get all orders](https://assignment2-chi-nine.vercel.app/api/orders)
+
+# How to set the project locally
+
+> > To run the project locally you can execute the command `npm run start:dev`. I have written a script inside the package.json file so that this will run the server in you local system.
+> > **Don't run the project using ts-node-dev or some other libraries which run the typescript file. I have some issues with import syntax. I have fixed that and run my server locally from the `.js` files.**

@@ -15,7 +15,10 @@ export async function getAllProducts(req, res) {
         }
     }
     catch (error) {
-        res.json(new CustomError("Bikes not found", { error }, error.stack));
+        res
+            .status(404)
+            .json(new CustomError("Bikes not found", { error }, error.stack))
+            .status(404);
     }
 }
 export async function getSpecificProduct(req, res) {
@@ -24,7 +27,9 @@ export async function getSpecificProduct(req, res) {
         res.json(new CustomResponse("Bike retrieved successfully", product));
     }
     catch (error) {
-        res.json(new CustomError("Bike not found", { error }, error.stack));
+        res
+            .json(new CustomError("Bike not found", { error }, error.stack))
+            .status(404);
     }
 }
 export async function updateSpecificProduct(req, res) {
@@ -70,7 +75,9 @@ export async function createOrder(req, res) {
     try {
         const product = await Product.findById(orderBody.product);
         if (!product) {
-            res.json(new CustomError("Product not found", {}, "fake error stack"));
+            res
+                .json(new CustomError("Product not found", {}, "fake error stack"))
+                .status(404);
             return;
         }
         else {
@@ -87,7 +94,9 @@ export async function createOrder(req, res) {
         }
     }
     catch (error) {
-        res.json(new CustomError("Product not found", { error }, error.stack));
+        res
+            .json(new CustomError("Product not found", { error }, error.stack))
+            .status(404);
     }
 }
 export async function getTotalRevenue(req, res) {
@@ -114,6 +123,8 @@ export async function getAllOrders(req, res) {
         res.json(new CustomResponse("Orders Retrieved successfully", orders));
     }
     catch (error) {
-        res.json(new CustomError("Orders not found", { error }, error.stack));
+        res
+            .json(new CustomError("Orders not found", { error }, error.stack))
+            .status(404);
     }
 }
