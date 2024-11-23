@@ -3,15 +3,23 @@ import { BikeCategory } from "./bikes.interfaces.js";
 
 const bikeValidationSchema = z
   .object({
-    name: z.string().min(1, { message: "Name is required" }),
-    brand: z.string().min(1, { message: "Brand is required" }),
+    name: z.string().min(1, { message: "Name is required" }).trim(),
+    brand: z.string().min(1, { message: "Brand is required" }).trim(),
     price: z.number().positive({ message: "Price must be a positive number" }),
-    category: z.nativeEnum(BikeCategory, { message: "Invalid bike category" }),
+    category: z
+      .string()
+      .transform((val) => val.trim()) // Trim spaces
+      .refine(
+        (val) => Object.values(BikeCategory).includes(val as BikeCategory),
+        {
+          message: "Invalid bike category",
+        }
+      ),
     quantity: z
       .number()
       .int()
       .min(0, { message: "Quantity cannot be negative" }),
-    description: z.string().optional(),
+    description: z.string().trim().optional(),
   })
   .strict();
 
