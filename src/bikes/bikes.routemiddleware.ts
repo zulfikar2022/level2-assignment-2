@@ -11,6 +11,7 @@ export async function validateProduct(
   next: Function
 ) {
   try {
+    req.body.category = req.body.category.trim();
     bikeValidationSchema.parse(req.body);
     next();
   } catch (error: any) {

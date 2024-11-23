@@ -2,6 +2,7 @@ import { bikeValidationSchema, orderValidationSchema, } from "./bikes.zodvalidat
 import { CustomError } from "./bikes.error.js";
 export async function validateProduct(req, res, next) {
     try {
+        req.body.category = req.body.category.trim();
         bikeValidationSchema.parse(req.body);
         next();
     }

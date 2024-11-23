@@ -1,7 +1,6 @@
 import CustomResponse from "./bikes.success.js";
 import { Order, Product } from "./bikes.models.js";
 import { CustomError } from "./bikes.error.js";
-import { bikeValidationSchema } from "./bikes.zodvalidation.js";
 export async function getAllProducts(req, res) {
     const queryParameters = req.query;
     const key = Object.keys(queryParameters)[0];
@@ -30,8 +29,8 @@ export async function getSpecificProduct(req, res) {
 }
 export async function updateSpecificProduct(req, res) {
     const newProduct = req.body;
+    newProduct.category = newProduct.category.trim();
     try {
-        bikeValidationSchema.parse(newProduct);
         newProduct.inStock = newProduct.quantity > 0;
         const product = await Product.findByIdAndUpdate(req.params.productId, newProduct, { new: true });
         res.json(new CustomResponse("Bike updated successfully", product));
@@ -55,8 +54,8 @@ export async function deleteSpecificProduct(req, res) {
 }
 export async function createProduct(req, res) {
     const newProduct = req.body;
+    newProduct.category = newProduct.category.trim();
     try {
-        bikeValidationSchema.parse(newProduct);
         newProduct.inStock = newProduct.quantity > 0;
         const product = new Product(newProduct);
         await product.save();

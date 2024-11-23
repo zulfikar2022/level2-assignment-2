@@ -3,6 +3,7 @@ import CustomResponse from "./bikes.success.js";
 import { Order, Product } from "./bikes.models.js";
 import { CustomError } from "./bikes.error.js";
 import { bikeValidationSchema } from "./bikes.zodvalidation.js";
+import { IProduct } from "./bikes.interfaces.js";
 
 export async function getAllProducts(req: Request, res: Response) {
   const queryParameters = req.query;
@@ -32,9 +33,8 @@ export async function getSpecificProduct(req: Request, res: Response) {
 
 export async function updateSpecificProduct(req: Request, res: Response) {
   const newProduct = req.body;
+  newProduct.category = newProduct.category.trim();
   try {
-    bikeValidationSchema.parse(newProduct);
-
     newProduct.inStock = newProduct.quantity > 0;
     const product = await Product.findByIdAndUpdate(
       req.params.productId,
@@ -68,9 +68,8 @@ export async function deleteSpecificProduct(req: Request, res: Response) {
 
 export async function createProduct(req: Request, res: Response) {
   const newProduct = req.body;
+  newProduct.category = newProduct.category.trim();
   try {
-    bikeValidationSchema.parse(newProduct);
-
     newProduct.inStock = newProduct.quantity > 0;
     const product = new Product(newProduct);
     await product.save();
