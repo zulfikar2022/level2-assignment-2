@@ -1,3 +1,4 @@
+// Custom error class to handle error response
 export class CustomError extends Error {
   message: string;
   success: boolean;

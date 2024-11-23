@@ -2,6 +2,7 @@ import { model, Schema } from "mongoose";
 import { BikeCategory, IOrder, IProduct } from "./bikes.interfaces.js";
 
 // Schemas are here
+// Product Schema
 export const ProductSchema = new Schema<IProduct>(
   {
     name: {
@@ -38,6 +39,7 @@ export const ProductSchema = new Schema<IProduct>(
   { timestamps: true }
 );
 
+// Order Schema
 export const OrderSchema = new Schema<IOrder>(
   {
     email: {

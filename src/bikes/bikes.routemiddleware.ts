@@ -5,6 +5,7 @@ import {
 } from "./bikes.zodvalidation.js";
 import { CustomError } from "./bikes.error.js";
 
+// validate product based on zod schema
 export async function validateProduct(
   req: Request,
   res: Response,
@@ -22,6 +23,7 @@ export async function validateProduct(
   }
 }
 
+// validate order based on zod schema
 export async function validateOrder(
   req: Request,
   res: Response,

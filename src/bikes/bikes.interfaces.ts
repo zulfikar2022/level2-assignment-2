@@ -19,6 +19,7 @@ export interface IProduct extends Document {
   inStock: boolean;
 }
 
+// TypeScript interface for Order
 export interface IOrder extends Document {
   email: string;
   product: string; // Referencing the Product

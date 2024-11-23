@@ -6,9 +6,9 @@ import { CustomError } from "./bikes/bikes.error.js";
 export const app: Application = express();
 
 // middlewares here
-app.use(express.json());
-app.use(cors());
-app.use("/api", bikeRouter);
+app.use(express.json()); // for parsing application/json
+app.use(cors()); // for cross-origin requests
+app.use("/api", bikeRouter); // for all bike routes
 
 // for undefined routes
 app.all("*", (req: Request, res: Response) => {

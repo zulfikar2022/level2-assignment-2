@@ -1,3 +1,4 @@
+// CustomResponse class to handle the response of the API
 class CustomResponse<T> {
   message: string;
   success: boolean;

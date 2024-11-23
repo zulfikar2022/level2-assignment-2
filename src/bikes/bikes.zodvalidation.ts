@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { BikeCategory } from "./bikes.interfaces.js";
 
+// Zod validation schema for bike
 const bikeValidationSchema = z
   .object({
     name: z.string().min(1, { message: "Name is required" }).trim(),
@@ -15,6 +16,7 @@ const bikeValidationSchema = z
   })
   .strict();
 
+// Zod validation schema for order
 const orderValidationSchema = z
   .object({
     email: z.string().email({ message: "Invalid email address" }),

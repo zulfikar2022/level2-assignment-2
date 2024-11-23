@@ -5,6 +5,7 @@ import { CustomError } from "./bikes.error.js";
 import { bikeValidationSchema } from "./bikes.zodvalidation.js";
 import { IProduct } from "./bikes.interfaces.js";
 
+// get all products ( based on the query parameters or not )
 export async function getAllProducts(req: Request, res: Response) {
   const queryParameters = req.query;
   const key = Object.keys(queryParameters)[0];
@@ -25,6 +26,7 @@ export async function getAllProducts(req: Request, res: Response) {
   }
 }
 
+// get specific product based on the product id
 export async function getSpecificProduct(req: Request, res: Response) {
   try {
     const product = await Product.findById(req.params.productId);
@@ -36,6 +38,7 @@ export async function getSpecificProduct(req: Request, res: Response) {
   }
 }
 
+// update specific product based on the product id
 export async function updateSpecificProduct(req: Request, res: Response) {
   const newProduct = req.body;
   newProduct.category = newProduct.category.trim();
@@ -52,6 +55,7 @@ export async function updateSpecificProduct(req: Request, res: Response) {
   }
 }
 
+// delete specific product based on the product id
 export async function deleteSpecificProduct(req: Request, res: Response) {
   try {
     const bike = await Product.findById(req.params.productId);
@@ -71,6 +75,7 @@ export async function deleteSpecificProduct(req: Request, res: Response) {
   }
 }
 
+// create a new product
 export async function createProduct(req: Request, res: Response) {
   const newProduct = req.body;
   newProduct.category = newProduct.category.trim();
@@ -84,6 +89,7 @@ export async function createProduct(req: Request, res: Response) {
   }
 }
 
+// create a new order
 export async function createOrder(req: Request, res: Response) {
   const orderBody = req.body;
   try {
@@ -114,6 +120,7 @@ export async function createOrder(req: Request, res: Response) {
   }
 }
 
+// get total revenue
 export async function getTotalRevenue(req: Request, res: Response) {
   try {
     const revenue = await Order.aggregate([
@@ -137,6 +144,7 @@ export async function getTotalRevenue(req: Request, res: Response) {
   }
 }
 
+// get all orders
 export async function getAllOrders(req: Request, res: Response) {
   try {
     const orders = await Order.find();
