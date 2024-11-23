@@ -127,3 +127,12 @@ export async function getTotalRevenue(req: Request, res: Response) {
     );
   }
 }
+
+export async function getAllOrders(req: Request, res: Response) {
+  try {
+    const orders = await Order.find();
+    res.json(new CustomResponse("Orders Retrieved successfully", orders));
+  } catch (error: any) {
+    res.json(new CustomError("Orders not found", { error }, error.stack));
+  }
+}
