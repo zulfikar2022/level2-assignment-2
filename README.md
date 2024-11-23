@@ -30,5 +30,4 @@ This project is a backend project created using javascript's library typescript 
 
 ## Important links
 
-_[Live Deployment link](https://assignment2-chi-nine.vercel.app/)_
-_[Vide Explanation Link]()_
+1._[Live Deployment link](https://assignment2-chi-nine.vercel.app/)_ 2._[Vide Explanation Link]()_
