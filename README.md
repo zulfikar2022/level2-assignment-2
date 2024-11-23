@@ -23,5 +23,7 @@ This project is a backend project created using javascript's library typescript 
 
 # How to set the project locally
 
+# `You need nodemon installed in your system to run my server locally`
+
 > > To run the project locally you can execute the command `npm run start:dev`. I have written a script inside the package.json file so that this will run the server in you local system.
 > > !!! **Don't run the project using ts-node-dev or some other libraries which run the typescript file. I have some issues with import syntax. I have fixed that and run my server locally from the `.js` files.**
