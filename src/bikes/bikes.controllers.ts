@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 import CustomResponse from "./bikes.success.js";
 import { Order, Product } from "./bikes.models.js";
 import { CustomError } from "./bikes.error.js";
-import {
-  bikeValidationSchema,
-  orderValidationSchema,
-} from "./bikes.zodvalidation.js";
+import { bikeValidationSchema } from "./bikes.zodvalidation.js";
 
 export async function getAllProducts(req: Request, res: Response) {
   const queryParameters = req.query;
