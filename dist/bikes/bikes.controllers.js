@@ -44,7 +44,7 @@ export async function deleteSpecificProduct(req, res) {
     try {
         const bike = await Product.findById(req.params.productId);
         if (!bike) {
-            res.json(new CustomResponse("Bike does not exist and cannot be deleted", {}));
+            res.json(new CustomResponse("Bike does not exist and cannot be deleted", {}, false));
         }
         const product = await Product.findByIdAndDelete(req.params.productId);
         res.json(new CustomResponse("Bike deleted successfully", product));

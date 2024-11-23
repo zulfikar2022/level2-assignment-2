@@ -3,10 +3,10 @@ class CustomResponse<T> {
   success: boolean;
   data: T;
 
-  constructor(message: string, data: T) {
+  constructor(message: string, data: T, success: boolean = true) {
     this.message = message;
-    this.success = true; // Always set to true for successful responses
     this.data = data;
+    this.success = success;
   }
 }
 

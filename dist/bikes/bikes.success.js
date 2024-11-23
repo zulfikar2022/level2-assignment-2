@@ -2,10 +2,10 @@ class CustomResponse {
     message;
     success;
     data;
-    constructor(message, data) {
+    constructor(message, data, success = true) {
         this.message = message;
-        this.success = true; // Always set to true for successful responses
         this.data = data;
+        this.success = success;
     }
 }
 export default CustomResponse;
